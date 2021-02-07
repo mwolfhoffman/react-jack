@@ -1,5 +1,5 @@
 import "./App.css";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { Container, Row, Col, Alert, Jumbotron } from "react-bootstrap";
 import Header from "./components/header";
 import Login from "./components/login";
 import { connect } from "react-redux";
@@ -19,26 +19,28 @@ function App(props) {
           GAME OVER!
         </Alert>
       ) : null}
-      <Row>
-        <Col>
-          <Header />
-        </Col>
-      </Row>
-      {props.players && !props.players.length ? (
+      <Jumbotron>
         <Row>
-          <Login />
+          <Col>
+            <Header />
+          </Col>
         </Row>
-      ) : (
-        <Row>
-          {props.players.map((player) => {
-            return (
-              <Col key={player.id}>
-                <PlayerContainer playerId={player.id} />
-              </Col>
-            );
-          })}
-        </Row>
-      )}
+        {props.players && !props.players.length ? (
+          <Row>
+            <Login />
+          </Row>
+        ) : (
+          <Row className="player-flex-container">
+            {props.players.map((player) => {
+              return (
+                <Col key={player.id}>
+                  <PlayerContainer playerId={player.id} />
+                </Col>
+              );
+            })}
+          </Row>
+        )}
+      </Jumbotron>
     </Container>
   );
 }

@@ -40,18 +40,24 @@ const mapDispatchToProps = {
     let newDeck = DeckService.createStandardDeck();
     return { type: actions.START_DECK, payload: newDeck };
   },
+  startDealerTurn: () => {
+    return { type: actions.START_DEALER_TURN };
+  },
 };
 
 const PlayerContainer = (props) => {
   const triggerHit = () => {
     props.hit({ playerId: props.player.id });
+    props.startDealerTurn();
+    props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
   };
 
   const triggerHold = () => {
     props.hold({
       playerId: props.player.id,
     });
-    props.dealNextRound();
+    props.startDealerTurn();
+    props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
   };
 
   const notEnoughCardForNextRound = () => {
