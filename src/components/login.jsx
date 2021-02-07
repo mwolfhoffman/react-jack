@@ -1,6 +1,6 @@
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import Actions from "../actions";
+import actions from "../actions";
 import Player from "../models/player";
 import { useState } from "react";
 import DeckService from "../services/deck.service";
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = {
   addUser: (username) => {
     return {
-      type: Actions.ADD_PLAYER,
+      type: actions.ADD_PLAYER,
       payload: new Player(username),
     };
   },
@@ -18,7 +18,7 @@ const mapDispatchToProps = {
   createStandardDeck: () => {
     let standardDeck = DeckService.createStandardDeck();
     return {
-      type: Actions.CREATE_STANDARD_DECK,
+      type: actions.CREATE_STANDARD_DECK,
       payload: standardDeck,
     };
   },

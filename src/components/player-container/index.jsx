@@ -1,6 +1,5 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import constants from "../../models/constants";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import actions from "../../actions";
 import ScoreComponent from "./score.component";
@@ -13,12 +12,6 @@ const mapStateToProps = (state, props) => ({
   decks: state.decks,
 });
 const mapDispatchToProps = {
-  updateCardValue: (payload) => {
-    return {
-      type: actions.UPDATE_CARD,
-      payload,
-    };
-  },
   hit: (payload) => {
     return {
       type: actions.PLAYER_HIT,
@@ -47,13 +40,6 @@ const mapDispatchToProps = {
 };
 
 const PlayerContainer = (props) => {
-  const [total, setTotal] = useState(0);
-
-  const userHasAce = (cards) => {
-    //  TODO: handle possibility of multiple aces.
-    return !!cards.find((card) => card.name === constants.cardNames.ACE);
-  };
-
   const triggerHit = () => {
     props.hit({ playerId: props.player.id });
   };
@@ -65,48 +51,7 @@ const PlayerContainer = (props) => {
     props.dealNextRound();
   };
 
-  const calculateTotal = (cards) => {
-    let total = cards.reduce((total, card) => {
-      return (total += card.value);
-    }, 0);
-
-    if (userHasAce(cards)) {
-      let ace = cards.find((card) => card.name === constants.cardNames.ACE);
-      if (total > 21) {
-        //  By default, Ace's value is 11.
-        //  If total is over 21, we will set the Ace's value to 1.
-        props.updateCardValue({
-          playerId: props.player.id,
-          card: { ...ace, value: 1 },
-        });
-      }
-    }
-    return total;
-  };
-
-  const userHasTwentyOne = (cards) => {
-    return calculateTotal(cards) === 21;
-  };
-
-  useEffect(() => {
-    setTotal((currentTotal) => {
-      if (!currentTotal) {
-        currentTotal = 0;
-      }
-      const cards = props.player.cards;
-      let newTotal = calculateTotal(cards);
-      if (Number.isNaN(newTotal)) {
-        throw new Error("New total is not a number.");
-      }
-      if (userHasTwentyOne(cards)) {
-        currentTotal = 21;
-        props.twentyOneOnFirstRound(props.player.id);
-        return props.dealNextRound();
-      }
-      currentTotal = newTotal;
-      console.log("Total: ", currentTotal);
-    });
-  }, [props.player.cards]);
+  
 
   const notEnoughCardForNextRound = () => {
     if (!props || !props.players) {
@@ -139,9 +84,9 @@ const PlayerContainer = (props) => {
       <Row>
         <ScoreComponent playerId={props.player.id} />
       </Row>
-      {/* <Row>
-        <TotalComponent total={total} />
-      </Row> */}
+      <Row>
+        <TotalComponent playerId={props.player.id} />
+      </Row>
       <Row>
         {props.player.cards.map((card) => {
           return (
