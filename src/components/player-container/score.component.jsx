@@ -10,15 +10,25 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = () => {
-  return {};
+const mapDispatchToProps={
+    gameOver: () => {
+      return {
+        type: actions.SET_GAME_OVER,
+      };
+  }
 };
 
-function ScoreComponent({ score }) {
+function ScoreComponent(props) {
+  useEffect(() => {
+    if (props.score >= 20) {
+      props.gameOver();
+    }
+  }, [props.score]);
+
   return (
     <div>
       <span>
-        <b>Score: </b> {score}
+        <b>Score: </b> {props.score}
       </span>
     </div>
   );

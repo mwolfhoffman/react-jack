@@ -113,6 +113,8 @@ export default function appReducer(state = initialState, action) {
         ],
         decks: [[...state.decks][0].slice(1)],
       };
+    case actions.SET_GAME_OVER:
+      return { ...state, gameOver: true };
     default:
       return { ...state };
   }

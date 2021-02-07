@@ -10,6 +10,7 @@ const mapStateToProps = (state, props) => ({
   players: state.players,
   player: state.players.find((player) => player.id === props.playerId),
   decks: state.decks,
+  gameOver: state.gameOver,
 });
 const mapDispatchToProps = {
   hit: (payload) => {
@@ -50,8 +51,6 @@ const PlayerContainer = (props) => {
     });
     props.dealNextRound();
   };
-
-  
 
   const notEnoughCardForNextRound = () => {
     if (!props || !props.players) {
@@ -103,7 +102,7 @@ const PlayerContainer = (props) => {
           );
         })}
       </Row>
-      {!props.player.isDealer ? (
+      {!props.player.isDealer && !props.gameOver ? (
         <Row>
           <Col>
             <Button onClick={triggerHit}> Hit </Button>
