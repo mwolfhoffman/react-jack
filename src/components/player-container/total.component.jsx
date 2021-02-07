@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import constants from "../../models/constants";
 import actions from "../../actions";
+import { Container, Row, Col } from "react-bootstrap";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -76,7 +77,13 @@ function TotalComponent(props) {
     }
   }, [total]);
 
-  return <>Total: {total}</>;
+  return (
+    <Container>
+      <Row>
+        <div>Total: {total}</div>
+      </Row>
+    </Container>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TotalComponent);

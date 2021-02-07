@@ -5,6 +5,8 @@ import actions from "../../actions";
 import ScoreComponent from "./score.component";
 import DeckService from "../../services/deck.service";
 import TotalComponent from "./total.component";
+import CardComponent from "./card.component";
+import CardsUpComponent from "./cards-up.component";
 
 const mapStateToProps = (state, props) => ({
   players: state.players,
@@ -83,21 +85,26 @@ const PlayerContainer = (props) => {
       <Row>
         <ScoreComponent playerId={props.player.id} />
       </Row>
+
       <Row>
-        <TotalComponent playerId={props.player.id} />
+        <CardsUpComponent cards={props.player.cards} />
       </Row>
+
       <Row>
         {props.player.cards.map((card) => {
           return (
             <div key={card.id}>
-              <Col>
-                <span className="card-container-key">Card:</span>
-                <span className="card-container-value">
-                  {card.name || card.value}
-                </span>
-                <span className="card-container-key">Suit: </span>
-                <span className="card-container-value">{card.suit}</span>
-              </Col>
+              {!props.player.isDealer ? (
+                <Col>
+                  <CardComponent card={card} />
+                </Col>
+              ) : null}
+
+              {props.player.isDealer && card.isUp ? (
+                <Col>
+                  <CardComponent card={card} />
+                </Col>
+              ) : null}
             </div>
           );
         })}
@@ -112,6 +119,11 @@ const PlayerContainer = (props) => {
           </Col>
         </Row>
       ) : null}
+      <Row>
+        {!props.player.isDealer ? (
+          <TotalComponent playerId={props.player.id} />
+        ) : null}
+      </Row>
     </Container>
   );
 };

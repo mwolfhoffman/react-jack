@@ -30,7 +30,7 @@ export default function appReducer(state = initialState, action) {
         players: [
           ...state.players.map((player) => {
             player.cards = action.payload.splice(0, 2);
-            player.cards.forEach((card) => (card.isUp = false)); // Each players cards start face up
+            player.cards.forEach((card) => (card.isUp = true)); // Each players cards start face up
             return player;
           }),
         ],
@@ -102,6 +102,7 @@ export default function appReducer(state = initialState, action) {
           ...state.players.map((player) => {
             if (player.id === action.payload.playerId) {
               let nextCard = [...state.decks[0]][0];
+              nextCard.isUp = true;
               return {
                 ...player,
                 cards: [...player.cards, nextCard],

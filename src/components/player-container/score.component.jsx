@@ -19,6 +19,7 @@ const mapDispatchToProps={
 };
 
 function ScoreComponent(props) {
+
   useEffect(() => {
     if (props.score >= 20) {
       props.gameOver();
