@@ -7,9 +7,9 @@ import configureMockStore from "redux-mock-store";
 
 let mockStore = configureMockStore();
 let container = null;
+let store;
 
 describe("App.js", () => {
-  let store;
 
   beforeEach(() => {
     // setup a DOM element as a render target
