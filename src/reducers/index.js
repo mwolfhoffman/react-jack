@@ -96,6 +96,7 @@ export default function appReducer(state = initialState, action) {
       };
 
     case actions.PLAYER_HIT:
+      debugger;
       return {
         ...state,
         players: [
@@ -103,9 +104,10 @@ export default function appReducer(state = initialState, action) {
             if (player.id === action.payload.playerId) {
               let nextCard = [...state.decks[0]][0];
               nextCard.isUp = true;
+              let playerCards = [...player.cards, nextCard];
               return {
                 ...player,
-                cards: [...player.cards, nextCard],
+                cards: playerCards,
               };
             } else {
               return { ...player };

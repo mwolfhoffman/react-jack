@@ -48,8 +48,8 @@ const mapDispatchToProps = {
 const PlayerContainer = (props) => {
   const triggerHit = () => {
     props.hit({ playerId: props.player.id });
-    props.startDealerTurn();
-    props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
+    //props.startDealerTurn();
+    //props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
   };
 
   const triggerHold = () => {
@@ -92,9 +92,9 @@ const PlayerContainer = (props) => {
         <ScoreComponent playerId={props.player.id} />
       </Row>
 
-      <Row>
+      {/* <Row>
         <CardsUpComponent cards={props.player.cards} />
-      </Row>
+      </Row> */}
 
       <Row>
         {props.player.cards.map((card) => {
