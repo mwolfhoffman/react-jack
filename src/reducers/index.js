@@ -96,7 +96,6 @@ export default function appReducer(state = initialState, action) {
       };
 
     case actions.PLAYER_HIT:
-      debugger;
       return {
         ...state,
         players: [

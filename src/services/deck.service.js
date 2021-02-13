@@ -1,4 +1,4 @@
-import Card  from "../models/cards";
+import Card from "../models/cards";
 import constants from "../models/constants";
 
 export default class DeckService {
@@ -32,9 +32,8 @@ export default class DeckService {
     Object.values(constants.cardNames).forEach((faceCardName) => {
       this.createCardForEachSuit(10, faceCardName, deck);
     });
-
+    console.log("deck was created and shuffled");
     let shuffledDeck = this.shuffleDeck(deck);
-    console.log(shuffledDeck);
     return shuffledDeck;
   }
 }

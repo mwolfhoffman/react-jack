@@ -1,13 +1,10 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import Login from "../components/login";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import { shallow, mount, configure } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-
-configure({ adapter: new Adapter() });
+import { render, fireEvent, screen } from "@testing-library/react";
 
 let mockStore = configureMockStore();
 let container = null;
@@ -40,17 +37,35 @@ describe("login.js", () => {
     expect(container).toBeTruthy();
   });
 
-  // it("Cannot use empty string as username", () => {
+  it("Login button disabled if no username", () => {
+    act(function () {
+      const createStandardDeck = jest.fn();
+      render(
+        <Provider store={store}>
+          <Login createStandardDeck={createStandardDeck} />
+        </Provider>
+      );
+
+      let button = document.getElementById("login-btn");
+      expect(button).toBeTruthy();
+      button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      expect(createStandardDeck).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  // it("Deck is created if username is present and button clicked", () => {
   //   act(function () {
-  //     const createStandardDeck = jest.fn();
-  //     const wrapper = mount(
+  //     const createStandardDeck = jest.fn((e) => e.preventDefault());
+  //     render(
   //       <Provider store={store}>
   //         <Login createStandardDeck={createStandardDeck} />
   //       </Provider>
   //     );
-  //     let button = wrapper.find("#login-btn");
-  //     button.at(1).simulate("click");
-  //     expect(props.createStandardDeck).toHaveBeenCalled();
+  //     container.username = "Test";
+  //     let button = document.getElementById("login-btn");
+  //     expect(button).toBeTruthy();
+  //     button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  //     expect(createStandardDeck).toHaveBeenCalledTimes(1);
   //   });
   // });
 });

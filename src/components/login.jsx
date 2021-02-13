@@ -40,7 +40,7 @@ const Login = (props) => {
       <Row>
         <Col xs={2}></Col>
         <Col className="center" xs={8}>
-          <Form onSubmit={(event) => handleLogin(event)}>
+          <Form id="login-form" onSubmit={(event) => handleLogin(event)}>
             <Form.Group>
               <Form.Label>What Should We Call You?</Form.Label>
               <Form.Control
