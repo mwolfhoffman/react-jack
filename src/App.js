@@ -22,7 +22,7 @@ function App(props) {
       <Jumbotron>
         <Row>
           <Col>
-            <Header />
+            {props.players && !props.players.length ? <Header /> : null}
           </Col>
         </Row>
         {props.players && !props.players.length ? (

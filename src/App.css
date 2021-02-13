@@ -1,4 +1,8 @@
-body{
+@import "./assets/css/style.css"
+
+
+
+/* body{
   background-color: #61b15a;
 }
 
@@ -34,4 +38,4 @@ body{
 .row > [class*='col-'] {
   display: flex;
   flex-direction: column;
-}
+} */

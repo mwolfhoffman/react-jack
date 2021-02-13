@@ -52,7 +52,7 @@ const Login = (props) => {
                 }}
               />
             </Form.Group>
-            <Button variant="primary" type="submit" id="login-btn">
+            <Button variant="primary" type="submit" id="login-btn" disabled={username.length<1}>
               Start Playing!
             </Button>
           </Form>

@@ -1,14 +1,15 @@
 import CardsUpComponent from "./cards-up.component";
+import { Card } from "react-bootstrap";
 
-export default function CardComponent({card}){
-return(
+export default function CardComponent({ card }) {
+  return (
     <>
-    <span className="card-container-key">Card:</span>
-    <span className="card-container-value">
-    {card.name || card.value}
-    </span>
-    <span className="card-container-key">Suit: </span>
-    <span className="card-container-value">{card.suit}</span>
+      <Card>
+        <Card.Body>
+          <Card.Title>{card.name || card.value}</Card.Title>
+          <Card.Text>{card.suit}</Card.Text>
+        </Card.Body>
+      </Card>
     </>
-)
+  );
 }

@@ -5,7 +5,7 @@ import Login from "../components/login";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import { shallow, mount, configure } from "enzyme";
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 configure({ adapter: new Adapter() });
 
@@ -40,24 +40,17 @@ describe("login.js", () => {
     expect(container).toBeTruthy();
   });
 
-//  TODO: finish this test, but Enzyme does not work with react 17 right now.
-//   it("Cannot use empty string as username", () => {
-//     act(function () {
-//       const createStandardDeck = jest.fn();
-//       const wrapper = mount(
-//         <Provider store={store}>
-//           <Login createStandardDeck={createStandardDeck} />
-//         </Provider>
-//       )
-//       //   wrapper.setUsername((name) => (name = "test"));
-//      const jumbotron = wrapper.find(".jumbotron")
-        
-//     //   .dive().find("login-btn").simulate("click");
-//       expect(jumbotron.length).toEqual(1);
-
-//     //   let button = wrapper.find("#login-btn");
-//     //   button.simulate("click");
-//     //   expect(createStandardDeck).toHaveBeenCalled();
-//     });
-//   });
+  // it("Cannot use empty string as username", () => {
+  //   act(function () {
+  //     const createStandardDeck = jest.fn();
+  //     const wrapper = mount(
+  //       <Provider store={store}>
+  //         <Login createStandardDeck={createStandardDeck} />
+  //       </Provider>
+  //     );
+  //     let button = wrapper.find("#login-btn");
+  //     button.at(1).simulate("click");
+  //     expect(props.createStandardDeck).toHaveBeenCalled();
+  //   });
+  // });
 });
