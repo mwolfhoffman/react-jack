@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import actions from "../actions";
 import Player from "../models/player";
 import { useState } from "react";
 import DeckService from "../services/deck.service";
-import constants from '../models/constants';
+import constants from "../models/constants";
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = {
@@ -30,6 +30,10 @@ const Login = (props) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    if (username.length < 1 || username === constants.DEALER) {
+      alert("Sorry, you must pick another name. Dealer is taken.")
+      return;
+    }
     props.addUser(username);
     props.addUser(constants.DEALER);
     props.createStandardDeck();
@@ -53,7 +57,12 @@ const Login = (props) => {
                 }}
               />
             </Form.Group>
-            <Button variant="primary" type="submit" id="login-btn" disabled={username.length<1}>
+            <Button
+              variant="primary"
+              type="submit"
+              id="login-btn"
+              disabled={username.length < 1 || username === constants.DEALER}
+            >
               Start Playing!
             </Button>
           </Form>
