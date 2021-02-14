@@ -6,7 +6,7 @@ I am using this project to learn more about Redux. I have been enjoying React bu
 
 It was built on `create-react-app` so any of the typical CRA commands should work.
 
-I have also begun experimenting with Docker and Jenkins and am using this application as a testing ground.
+I have also begun experimenting with Docker and some DevOps tools (Jenkins and Netlify) and am using this application as a testing ground.
 
 
 ## To Run Locally:
