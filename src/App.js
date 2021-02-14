@@ -4,6 +4,7 @@ import Header from "./components/header";
 import Login from "./components/login";
 import { connect } from "react-redux";
 import PlayerContainer from "./components/player-container";
+import React from 'react';
 
 const mapStateToProps = (state) => ({
   players: state.players,

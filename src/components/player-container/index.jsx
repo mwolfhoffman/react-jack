@@ -1,3 +1,4 @@
+import React from 'react'
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -7,7 +8,6 @@ import DeckService from "../../services/deck.service";
 import TotalComponent from "./total.component";
 import CardComponent from "./card.component";
 import CardsUpComponent from "./cards-up.component";
-
 const mapStateToProps = (state, props) => ({
   players: state.players,
   player: state.players.find((player) => player.id === props.playerId),

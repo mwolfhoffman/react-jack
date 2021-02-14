@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
-
+import React from 'react'
 const mapStateToProps = (state, props) => {
   return {
     cards: props.cards,

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import actions from "../actions";

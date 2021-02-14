@@ -1,3 +1,4 @@
+import React from 'react'
 import CardsUpComponent from "./cards-up.component";
 import { Card } from "react-bootstrap";
 
