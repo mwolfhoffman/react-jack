@@ -117,8 +117,8 @@ export default function appReducer(state = initialState, action) {
       };
     case actions.SET_GAME_OVER:
       return { ...state, gameOver: true };
-    case actions.START_DEALER_TURN:
-      break;
+    // case actions.START_DEALER_TURN:
+    //   break;
     //  TODO: Need to check if dealer will hit or hold.
     //  Need to be able to communicate if next round should start.
     default:
