@@ -1,5 +1,6 @@
 import actions from "../actions";
 import ScoreService from "../services/score.service";
+import constants from "../models/constants";
 
 const initialState = {
   players: [],
@@ -56,6 +57,38 @@ export default function appReducer(state = initialState, action) {
       };
 
     case actions.PLAYER_HOLD:
+      return {
+        ...state,
+        players: [
+          ...state.players.map((player) => {
+            if (player.id === action.payload.playerId) {
+              return {
+                ...player,
+                roundOver: true,
+              };
+            } else {
+              return player;
+            }
+          }),
+        ],
+      };
+    case actions.DEALER_HOLD:
+      return {
+        ...state,
+        players: [
+          ...state.players.map((player) => {
+            if (player.isDealer) {
+              return {
+                ...player,
+                roundOver: true,
+              };
+            } else {
+              return player;
+            }
+          }),
+        ],
+      };
+    case actions.UPDATE_SCORE:
       let winningPlayerIds = ScoreService.findWinningPlayerIds(state.players);
       return {
         ...state,
@@ -65,8 +98,9 @@ export default function appReducer(state = initialState, action) {
               ? {
                   ...player,
                   score: player.score + 1,
+                  roundOver: false,
                 }
-              : { ...player };
+              : { ...player, roundOver: false };
           }),
         ],
       };
@@ -77,6 +111,7 @@ export default function appReducer(state = initialState, action) {
           ...state.players.map((player) => {
             player.cards = [...state.decks][0].splice(0, 2);
             player.cards[0].isUp = true;
+            player.roundOver = false;
             return player;
           }),
         ],
@@ -96,6 +131,9 @@ export default function appReducer(state = initialState, action) {
       };
 
     case actions.PLAYER_HIT:
+      if (state.gameOver) {
+        return state;
+      }
       return {
         ...state,
         players: [
@@ -117,10 +155,51 @@ export default function appReducer(state = initialState, action) {
       };
     case actions.SET_GAME_OVER:
       return { ...state, gameOver: true };
-    // case actions.START_DEALER_TURN:
-    //   break;
-    //  TODO: Need to check if dealer will hit or hold.
-    //  Need to be able to communicate if next round should start.
+    case actions.START_DEALER_TURN:
+      let dealer = { ...state }.players.find(
+        (player) => player.username === constants.DEALER
+      );
+      let dealerCurrentScore = dealer.cards.reduce(
+        (total, card) => total + card.value,
+        0
+      );
+      if (dealerCurrentScore < 16) {
+        return {
+          ...state,
+          players: [
+            ...state.players.map((player) => {
+              if (player.username === constants.DEALER) {
+                let nextCard = [...state.decks[0]][0];
+                nextCard.isUp = true;
+                let playerCards = [...player.cards, nextCard];
+                return {
+                  ...player,
+                  cards: playerCards,
+                };
+              } else {
+                return { ...player };
+              }
+            }),
+          ],
+          decks: [[...state.decks][0].slice(1)],
+        };
+      } else {
+        return {
+          ...state,
+          players: [
+            ...state.players.map((player) => {
+              if (player.username === constants.DEALER) {
+                return {
+                  ...player,
+                  roundOver: true,
+                };
+              } else {
+                return player;
+              }
+            }),
+          ],
+        };
+      }
     default:
       return { ...state };
   }

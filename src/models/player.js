@@ -8,5 +8,6 @@ export default class Player {
     this.score = 0;
     this.cards = [];
     this.isDealer = username === constants.DEALER;
+    this.roundOver = false;
   }
 }

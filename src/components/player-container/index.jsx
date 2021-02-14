@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useEffect } from "react";
 import { connect } from "react-redux";
@@ -27,9 +27,6 @@ const mapDispatchToProps = {
       payload,
     };
   },
-  dealNextRound: () => {
-    return { type: actions.DEAL_NEXT_ROUND, payload: null };
-  },
   twentyOneOnFirstRound(playerId) {
     return {
       type: actions.TWENTY_ONE_FIRST_ROUND,
@@ -48,8 +45,7 @@ const mapDispatchToProps = {
 const PlayerContainer = (props) => {
   const triggerHit = () => {
     props.hit({ playerId: props.player.id });
-    //props.startDealerTurn();
-    //props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
+    props.startDealerTurn();
   };
 
   const triggerHold = () => {
@@ -57,7 +53,6 @@ const PlayerContainer = (props) => {
       playerId: props.player.id,
     });
     props.startDealerTurn();
-    props.dealNextRound(); // TODO: Will need to be determined if all players have held before this is called.
   };
 
   const notEnoughCardForNextRound = () => {
@@ -91,11 +86,6 @@ const PlayerContainer = (props) => {
       <Row>
         <ScoreComponent playerId={props.player.id} />
       </Row>
-
-      {/* <Row>
-        <CardsUpComponent cards={props.player.cards} />
-      </Row> */}
-
       <Row>
         {props.player.cards.map((card) => {
           return (
