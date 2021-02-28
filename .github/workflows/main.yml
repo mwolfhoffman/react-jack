@@ -1,21 +1,17 @@
-name: React-App-CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+name: CI
+on: [push]
 jobs:
   build:
+    name: Test
     runs-on: ubuntu-latest
     steps:
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-          cmd: install --frozen-lockfile
+      - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: build
+          cmd: install # will run `yarn install` command
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: test
+          cmd: build # will run `yarn build` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test # will run `yarn test` command
