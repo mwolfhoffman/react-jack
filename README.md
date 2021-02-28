@@ -1,5 +1,9 @@
 # React Jack
 
+
+[![React-App-CI](https://github.com/mwolfhoffman/react-jack/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/mwolfhoffman/react-jack/actions/workflows/main.yml)
+
+
 This is a Blackjack game written with React and Redux.
 
 I am using this project to learn more about Redux. I have been enjoying React but want to get better at mutating my Redux state and discover some best practices.
