@@ -10,8 +10,9 @@ I am using this project to learn more about Redux. I have been enjoying React bu
 
 It was built on `create-react-app` so any of the typical CRA commands should work.
 
-I have also begun experimenting with Docker and some DevOps tools (Jenkins and Netlify) and am using this application as a testing ground.
+I have also begun experimenting with Docker and some DevOps tools (Github Actions and Netlify) and am using this application as a testing ground.
 
+This application is hosted at [here](https://upbeat-tesla-55cde2.netlify.app/).
 
 ## To Run Locally:
 
