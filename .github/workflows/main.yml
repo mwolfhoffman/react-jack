@@ -10,4 +10,5 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
-      - run: ci=false npm run build
+      - run: ci=false
+      - run: npm run build
